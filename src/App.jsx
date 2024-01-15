@@ -8,6 +8,7 @@ export default function App() {
   const [prevFuel, setPrevFuel] = useState(0);
   const [rpm, setRpm] = useState(0);
   const [prevRpm, setPrevRpm] = useState(0);
+  //dhbew
 
   const updateRPM = (rpm) => {
     const progressBar = document.querySelector('[role="progressbar"]');
