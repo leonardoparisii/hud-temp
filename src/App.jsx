@@ -9,14 +9,14 @@ export default function App() {
   const [rpm, setRpm] = useState(0);
   const [prevRpm, setPrevRpm] = useState(0);
 
-  const updateRPM = (newRPM) => {
+  const updateRPM = (rpm) => {
     const progressBar = document.querySelector('[role="progressbar"]');
     const currentPercentage =
       progressBar.style.getPropertyValue("--percentage").trim() || 0;
 
     progressBar.style.setProperty("--prev-value", currentPercentage);
-    progressBar.style.setProperty("--value", newRPM);
-    progressBar.style.setProperty("--percentage", newRPM);
+    progressBar.style.setProperty("--value", rpm);
+    progressBar.style.setProperty("--percentage", rpm);
 
     progressBar.style.animation = "none";
     setTimeout(() => {
