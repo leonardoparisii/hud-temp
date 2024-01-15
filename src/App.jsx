@@ -6,8 +6,24 @@ export default function App() {
   const [gear, setGear] = useState(0);
   const [fuel, setFuel] = useState(57);
   const [prevFuel, setPrevFuel] = useState(0);
-  const [rpm, setRpm] = useState(76);
+  const [rpm, setRpm] = useState(0);
   const [prevRpm, setPrevRpm] = useState(0);
+  //dhbew
+
+  const updateRPM = (rpm) => {
+    const progressBar = document.querySelector('[role="progressbar"]');
+    const currentPercentage =
+      progressBar.style.getPropertyValue("--percentage").trim() || 0;
+
+    progressBar.style.setProperty("--prev-value", currentPercentage);
+    progressBar.style.setProperty("--value", rpm);
+    progressBar.style.setProperty("--percentage", rpm);
+
+    progressBar.style.animation = "none";
+    setTimeout(() => {
+      progressBar.style.animation = "progress 1s 0.5s forwards";
+    }, 0);
+  };
 
   const onMessage = (event) => {
     const { data } = event;
@@ -38,11 +54,6 @@ export default function App() {
     };
   }, []);
 
-  setTimeout(() => {
-    setFuel(30);
-    setRpm(30);
-  }, 3000);
-
   return (
     <div className="relative flex h-full gap-20">
       {/* Dashed border circle */}
@@ -68,6 +79,45 @@ export default function App() {
           ></div>
         </div>
       </div>
+      <div className="flex gap-5 text-white">
+        <button
+          onClick={() => {
+            updateRPM(20);
+          }}
+        >
+          20
+        </button>
+        <button
+          onClick={() => {
+            updateRPM(40);
+          }}
+        >
+          40
+        </button>
+        <button
+          onClick={() => {
+            updateRPM(60);
+          }}
+        >
+          60
+        </button>
+        <button
+          onClick={() => {
+            updateRPM(80);
+          }}
+        >
+          80
+        </button>
+        <button
+          onClick={() => {
+            updateRPM(100);
+          }}
+        >
+          100
+        </button>
+      </div>
+      <h1>{prevRpm}</h1>
+      <h1>{rpm}</h1>
     </div>
   );
 }
