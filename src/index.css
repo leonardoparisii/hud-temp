@@ -23,6 +23,18 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 65% 100%, 48% 56%, 0 30%);
   }
 
+  .dashed-circle-orange-mask {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' rx='100000' ry='100000' stroke='%236a3c1f' stroke-width='20' stroke-dasharray='90px 13px' stroke-dashoffset='15' stroke-linecap='butt' fill='none' /%3e%3c/svg%3e");
+    border-radius: 100%;
+    clip-path: polygon(100% 36%, 100% 80%, 71% 60%, 75% 44%);
+  }
+
+  .dashed-circle-red-mask {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' rx='100000' ry='100000' stroke='%236d1717' stroke-width='20' stroke-dasharray='90px 13px' stroke-dashoffset='15' stroke-linecap='butt' fill='none' /%3e%3c/svg%3e");
+    border-radius: 100%;
+    clip-path: polygon(100% 100%, 65% 100%, 65% 58%, 100% 77%);
+  }
+
   /* FUEL PROGRESS BAR */
   .fuel-progress {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' rx='100000' ry='100000' stroke='%23255F6B' stroke-width='10' stroke-dasharray='90px 0px' stroke-dashoffset='15' stroke-linecap='butt' fill='none' /%3e%3c/svg%3e");
@@ -46,6 +58,15 @@ body {
   initial-value: 0;
 }
 
+@keyframes progress {
+  0% {
+    --percentage: var(--prev-value, 0);
+  }
+  100% {
+    --percentage: var(--value, 0);
+  }
+}
+
 /* OUTER SPEEDOMETER */
 
 [role="progressbar"] {
@@ -63,7 +84,6 @@ body {
 }
 
 [role="progressbar"]::before {
-  transition: all 2s ease;
   content: "";
   position: absolute;
   top: 0;
@@ -71,9 +91,67 @@ body {
   width: 100%;
   height: 100%;
   background: conic-gradient(
-    from 0.83turn at 50% 55%,
-    var(--primary) calc(var(--percentage) * 1% * 0.61),
-    var(--secondary) calc(var(--percentage) * 1% * 0.61 + 0.1%)
+    from 0.817turn at 50% 50%,
+    var(--primary) calc(var(--percentage) * 1% * 0.63),
+    var(--secondary) calc(var(--percentage) * 1% * 0.63 + 0.1%)
+  );
+}
+
+/* ORANGE MASK */
+[role="progressbar-orange-mask"] {
+  --primary: #f57220;
+  --secondary: transparent;
+  --size: 275px;
+  animation: progress 1s 0.5s forwards;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' rx='100000' ry='100000' stroke='%23787878' stroke-width='20' stroke-dasharray='90px 13px' stroke-dashoffset='15' stroke-linecap='butt' fill='none' /%3e%3c/svg%3e");
+}
+
+[role="progressbar-orange-mask"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    from 0.817turn at 50% 50%,
+    var(--primary) calc(var(--percentage) * 1% * 0.63),
+    var(--secondary) calc(var(--percentage) * 1% * 0.63 + 0.1%)
+  );
+}
+
+/* RED MASK */
+[role="progressbar-red-mask"] {
+  --primary: #f42121;
+  --secondary: transparent;
+  --size: 275px;
+  animation: progress 1s 0.5s forwards;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  mask: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' rx='100000' ry='100000' stroke='%23787878' stroke-width='20' stroke-dasharray='90px 13px' stroke-dashoffset='15' stroke-linecap='butt' fill='none' /%3e%3c/svg%3e");
+}
+
+[role="progressbar-red-mask"]::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(
+    from 0.817turn at 50% 50%,
+    var(--primary) calc(var(--percentage) * 1% * 0.63),
+    var(--secondary) calc(var(--percentage) * 1% * 0.63 + 0.1%)
   );
 }
 
@@ -101,7 +179,7 @@ body {
   width: 100%;
   height: 100%;
   background: conic-gradient(
-    from 0.8235turn at 50% 55%,
+    from 0.8335turn at 50% 55%,
     var(--primary) calc(var(--percentage) * 1% * 0.615),
     var(--secondary) calc(var(--percentage) * 1% * 0.615 + 0.1%)
   );
